@@ -1,4 +1,4 @@
-from data.pemrosesan_data import ambilData, labelEncode
+from data.pemrosesan_data import ambilData, labelEncode, Split
 from algoritma.knn import euclidean_distance
 from sklearn.model_selection import train_test_split
 
@@ -17,8 +17,19 @@ if __name__ == '__main__':
     
     # menampilkan dataset yang telah diencoding
     print ("\t\tDataset Yang Telah Diencoding")
-    print (dataset)  
+    print (dataset) 
 
+    X_train, X_test, y_train, y_test = Split(dataset)
+
+    print("X Train")
+    print(X_train)
+    print("X test")
+    print(X_test)
+    print("Y Train")
+    print(y_train)
+    print("Y test")
+    print(y_test)
+    
     # Misalkan 'X' adalah matriks fitur dan 'y' adalah array target
     # Sesuaikan X dan y dengan dataset kamu
     X = dataset.drop('HeartDisease', axis=1)  # Drop kolom target jika ada
@@ -34,4 +45,6 @@ if __name__ == '__main__':
     print(X_test.iloc[0])
     ed = euclidean_distance(X_test.iloc[0], X_train.iloc[0], X)
     print(ed)
+
+    
     
