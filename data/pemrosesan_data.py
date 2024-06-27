@@ -8,7 +8,7 @@ def ambilData():
     # Path ke file dataset
     #path = "dataset/heart.csv"
     # Membaca dataset menggunakan Pandas
-    dataset = pd.read_csv("data/dataset/heart.csv")
+    dataset = pd.read_csv("data/dataset/dataset.csv")
     return dataset
 
 #Label Encoding mengubah nilai kategorikal menjadi numerikal
@@ -24,8 +24,8 @@ def Split(dataset):
     n = int(len(dataset) * 0.7) #maks index dataset
 
     # Memisahkan fitur dan target
-    X = dataset.drop('HeartDisease', axis=1)  # Drop kolom target jika ada
-    y = dataset['HeartDisease']
+    X = dataset.drop('Bidang_Minat', axis=1)  # Drop kolom target jika ada
+    y = dataset['Bidang_Minat']
 
      # Memisahkan dataset berdasarkan proporsi
     X_train = X.iloc[:n]
