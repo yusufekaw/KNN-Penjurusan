@@ -80,8 +80,19 @@ if __name__ == '__main__':
 
     # Kelas prediksi
     kelas_prediksi_df = pd.DataFrame(kelas_prediksi)
+    kelas_prediksi_df.reset_index(drop=True, inplace=True)
+    y_test.reset_index(drop=True, inplace=True)
+    hasil_prediksi = result = pd.concat([kelas_prediksi_df, y_test], axis=1)
+    hasil_prediksi.rename(columns={'Bidang_Minat': 'Target'}, inplace=True)
     print("Kelas Baru pada Data Pengujian Berdasarkan Kelas Mayoritas dari Tetangga Terdekat:")
-    print(kelas_prediksi_df)
+    print(hasil_prediksi)
+
+    prediksi_benar = (hasil_prediksi['Kelas Prediksi'] == hasil_prediksi['Target']).sum()
+    prediksi_salah = hasil_prediksi.shape[0]-prediksi_benar
+    akurasi = (prediksi_benar/hasil_prediksi.shape[0])*100
+    print("Prediksi Benar : ",prediksi_benar)
+    print("Prediksi salah : ",prediksi_salah)
+    print("Akurasi : ",round(akurasi,2),"%")
 
     # Jumlah peminat jurusan
     bidang_minat = pd.Series(list(set(dataset['Bidang_Minat']).union(set(kelas_prediksi_df['Kelas Prediksi']))))

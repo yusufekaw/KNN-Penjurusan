@@ -21,7 +21,7 @@ def labelEncode(dataset):
 
 #split dataset (training testing)
 def Split(dataset):
-    n = int(len(dataset) * 0.7) #maks index dataset
+    n = int(len(dataset) * 0.9) #maks index dataset
 
     # Memisahkan fitur dan target
     X = dataset.drop('Bidang_Minat', axis=1)  # Drop kolom target jika ada
