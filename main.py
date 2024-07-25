@@ -1,6 +1,7 @@
 from data.pemrosesan_data import ambilData, labelEncode, Split
 from algoritma.knn import euclidean_distance
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import precision_score, recall_score, f1_score
 import pandas as pd
 from collections import Counter
 
@@ -35,7 +36,6 @@ if __name__ == '__main__':
         jarak = []
         for ii in range(len(X_train)):
             hitung_jarak = euclidean_distance(X_test.iloc[i],X_train.iloc[ii], X_train)
-            print(i,' : ',ii,' : ',hitung_jarak)
             jarak.append(hitung_jarak)
         matriks_jarak.append(jarak)
 
@@ -90,9 +90,15 @@ if __name__ == '__main__':
     prediksi_benar = (hasil_prediksi['Kelas Prediksi'] == hasil_prediksi['Target']).sum()
     prediksi_salah = hasil_prediksi.shape[0]-prediksi_benar
     akurasi = (prediksi_benar/hasil_prediksi.shape[0])*100
+    presisi = precision_score(hasil_prediksi['Kelas Prediksi'], hasil_prediksi['Target'], average='micro')*100
+    recall = recall_score(hasil_prediksi['Kelas Prediksi'], hasil_prediksi['Target'], average='micro')*100
+    f1 = f1_score(hasil_prediksi['Kelas Prediksi'], hasil_prediksi['Target'], average='micro')*100
     print("Prediksi Benar : ",prediksi_benar)
     print("Prediksi salah : ",prediksi_salah)
     print("Akurasi : ",round(akurasi,2),"%")
+    print("Presisi : ",round(presisi,2),"%")
+    print("Recall : ",round(recall,2),"%")
+    print("F1 : ",round(f1,2),"%")
 
     # Jumlah peminat jurusan
     bidang_minat = pd.Series(list(set(dataset['Bidang_Minat']).union(set(kelas_prediksi_df['Kelas Prediksi']))))
