@@ -89,10 +89,10 @@ if __name__ == '__main__':
 
     prediksi_benar = (hasil_prediksi['Kelas Prediksi'] == hasil_prediksi['Target']).sum()
     prediksi_salah = hasil_prediksi.shape[0]-prediksi_benar
-    akurasi = (prediksi_benar/hasil_prediksi.shape[0])*100
+    akurasi = (prediksi_benar/hasil_prediksi.shape[0])
     print("Prediksi Benar : ",prediksi_benar)
     print("Prediksi salah : ",prediksi_salah)
-    print("Akurasi : ",round(akurasi,2),"%")
+    print("Akurasi : ",round(akurasi,2))
 
     # Jumlah peminat jurusan
     bidang_minat = pd.Series(list(set(dataset['Bidang_Minat']).union(set(kelas_prediksi_df['Kelas Prediksi']))))
